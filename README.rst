@@ -23,6 +23,6 @@ Available states
 Enables the vmware-tools service.
 
 Formula Dependencies
---------------------
+====================
 
 * build-essentials
