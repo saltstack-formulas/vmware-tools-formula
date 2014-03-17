@@ -1,5 +1,6 @@
+====================
 vmware-tools-formula
-================
+====================
 
 A saltstack formula for installing and starting vmware-tools.
 
@@ -11,7 +12,7 @@ Depends on build-essential formula.
     <http://docs.saltstack.com/topics/conventions/formulas.html>`_.
 
 Available states
-----------------
+================
 
 .. contents::
     :local:
