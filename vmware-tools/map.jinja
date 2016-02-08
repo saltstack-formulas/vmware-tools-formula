@@ -1,0 +1,47 @@
+{##
+# set defaults since deploying from sources
+##}
+{% set vmware_defaults = {
+  'tools':
+  {
+    'latest': 'VMwareTools-9.4.15-2827462.tar.gz',
+    'hash': 'md5=6d46188024553a4576977b54caae5403',
+    'source': 'http://webserver/Latest_VMware_Tools/VMwareTools-9.4.15-2827462.tar.gz',
+  },
+} %}
+
+{##
+# merge the default settings with pillar data
+##}
+{% set vmware = salt['pillar.get']('vmware:tools', default=vmware_defaults.tools,merge=True) %}
+
+{##
+# get the settings for the osmajorrelease grain
+##}
+{% set os_ver_lookup = {
+  'RedHat':
+  {
+    '7':
+    {
+      'include': 'open-vm-tools',
+    },
+    '6':
+    {
+      'include': 'vmware-tools',
+    },
+  },
+  'CentOS':
+  {
+    '7':
+    {
+      'include': 'open-vm-tools',
+    },
+    '6':
+    {
+      'include': 'vmware-tools',
+    },
+  },
+} %}
+
+{% set os_ver_map = os_ver_lookup.get(grains.os, {}) %}
+{% set include_file = os_ver_map.get(grains.osmajorrelease, {}) %}

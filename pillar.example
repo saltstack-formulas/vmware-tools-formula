@@ -1,0 +1,5 @@
+vmware:
+  tools:
+    latest: VMwareTools-9.4.15-2827462.tar.gz
+    hash: md5=6d46188024553a4576977b54caae5403
+    source: http://webserver/Latest_VMware_Tools/VMwareTools-9.4.15-2827462.tar.gz
