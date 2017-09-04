@@ -1,6 +1,4 @@
-{##
-# set defaults since deploying from sources
-##}
+# Get defaults since deploying from sources
 {% set vmware_defaults = {
   'tools':
   {
@@ -10,33 +8,29 @@
   },
 } %}
 
-{##
-# merge the default settings with pillar data
-##}
+# Merge the default settings with pillar data
 {% set vmware = salt['pillar.get']('vmware:tools', default=vmware_defaults.tools,merge=True) %}
 
-{##
-# get the settings for the osmajorrelease grain
-##}
+# Get the settings for the osmajorrelease grain
 {% set os_ver_lookup = {
   'RedHat':
   {
-    '7':
+    7:
     {
       'include': 'open-vm-tools',
     },
-    '6':
+    6:
     {
       'include': 'vmware-tools',
     },
   },
   'CentOS':
   {
-    '7':
+    7:
     {
       'include': 'open-vm-tools',
     },
-    '6':
+    6:
     {
       'include': 'vmware-tools',
     },
