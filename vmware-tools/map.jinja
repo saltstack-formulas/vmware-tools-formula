@@ -37,5 +37,6 @@
   },
 } %}
 
-{% set os_ver_map = os_ver_lookup.get(grains.os, {}) %}
-{% set include_file = os_ver_map.get(grains.osmajorrelease, {}) %}
+{% set os_ver_map = os_ver_lookup.get(grains.os, {}) %} 
+{% set osrelease = salt['grains.get']('osmajorrelease') | int %}
+{% set include_file = os_ver_map.get(osrelease, {}) %} 
