@@ -1,4 +1,4 @@
-# Get defaults since deploying from sources
+# Set defaults since deploying from sources
 {% set vmware_defaults = {
   'tools':
   {
@@ -18,25 +18,25 @@
     7:
     {
       'include': 'open-vm-tools',
+      'package': 'open-vm-tools',
+      'service': 'vmtoolsd',
     },
     6:
     {
       'include': 'vmware-tools',
-    },
+    }
   },
-  'CentOS':
+  'Debian':
   {
-    7:
+    9:
     {
       'include': 'open-vm-tools',
-    },
-    6:
-    {
-      'include': 'vmware-tools',
-    },
-  },
+      'package': 'open-vm-tools',
+      'service': 'open-vm-tools',
+    }
+  }
 } %}
 
-{% set os_ver_map = os_ver_lookup.get(grains.os, {}) %} 
+{% set os_map = os_ver_lookup.get(grains.os_family, {}) %} 
 {% set osrelease = salt['grains.get']('osmajorrelease') | int %}
-{% set include_file = os_ver_map.get(osrelease, {}) %} 
+{% set config = os_map.get(osrelease, {}) %} 
