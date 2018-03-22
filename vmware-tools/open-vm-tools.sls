@@ -1,9 +1,10 @@
+{% from "vmware-tools/map.jinja" import config with context %}
 package-install-open-vm-tools:
   pkg.installed:
     - pkgs:
-      - open-vm-tools
+      - {{ config.package }}
 
 service-open-vm-tools:
   service.running:
-    - name: vmtoolsd
+    - name: {{ config.service }}
     - enable: True

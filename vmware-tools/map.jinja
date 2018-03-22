@@ -1,6 +1,4 @@
-{##
-# set defaults since deploying from sources
-##}
+# Set defaults since deploying from sources
 {% set vmware_defaults = {
   'tools':
   {
@@ -10,38 +8,35 @@
   },
 } %}
 
-{##
-# merge the default settings with pillar data
-##}
+# Merge the default settings with pillar data
 {% set vmware = salt['pillar.get']('vmware:tools', default=vmware_defaults.tools,merge=True) %}
 
-{##
-# get the settings for the osmajorrelease grain
-##}
+# Get the settings for the osmajorrelease grain
 {% set os_ver_lookup = {
   'RedHat':
   {
-    '7':
+    7:
     {
       'include': 'open-vm-tools',
+      'package': 'open-vm-tools',
+      'service': 'vmtoolsd',
     },
-    '6':
+    6:
     {
       'include': 'vmware-tools',
-    },
+    }
   },
-  'CentOS':
+  'Debian':
   {
-    '7':
+    9:
     {
       'include': 'open-vm-tools',
-    },
-    '6':
-    {
-      'include': 'vmware-tools',
-    },
-  },
+      'package': 'open-vm-tools',
+      'service': 'open-vm-tools',
+    }
+  }
 } %}
 
-{% set os_ver_map = os_ver_lookup.get(grains.os, {}) %}
-{% set include_file = os_ver_map.get(grains.osmajorrelease, {}) %}
+{% set os_map = os_ver_lookup.get(grains.os_family, {}) %} 
+{% set osrelease = salt['grains.get']('osmajorrelease') | int %}
+{% set config = os_map.get(osrelease, {}) %} 
