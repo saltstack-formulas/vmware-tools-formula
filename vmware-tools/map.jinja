@@ -34,9 +34,18 @@
       'package': 'open-vm-tools',
       'service': 'open-vm-tools',
     }
+  },
+  'Ubuntu':
+  {
+    18:
+    {
+      'include': 'open-vm-tools',
+      'package': 'open-vm-tools',
+      'service': 'open-vm-tools',
+    }
   }
 } %}
 
-{% set os_map = os_ver_lookup.get(grains.os_family, {}) %} 
+{% set os_map = os_ver_lookup.get(grains.os, {}) %} 
 {% set osrelease = salt['grains.get']('osmajorrelease') | int %}
 {% set config = os_map.get(osrelease, {}) %} 
