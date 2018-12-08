@@ -1,0 +1,40 @@
+default:
+  include: 'open-vm-tools'
+  package: 'open-vm-tools'
+  service: 'vmtoolsd'
+
+Ubuntu-12.04:
+  include: 'vmware-tools'
+
+Ubuntu-14.04:
+  service: 'open-vm-tools'
+
+Ubuntu-16.04:
+  service: 'open-vm-tools'
+
+Ubuntu-18.04:
+  service: 'open-vm-tools'
+
+Red Hat Enterprise Linux Server-6:
+  include: 'vmware-tools'
+
+Red Hat Enterprise Linux Server-7:
+  include: 'open-vm-tools'
+  package: 'open-vm-tools'
+  service: 'vmtoolsd'
+
+CentOS-6:
+  include: 'vmware-tools'
+
+CentOS-7:
+  include: 'open-vm-tools'
+  package: 'open-vm-tools'
+  service: 'vmtoolsd'
+
+Oracle Linux Server-6:
+  include: 'vmware-tools'
+
+Oracle Linux Server-7:
+  include: 'open-vm-tools'
+  package: 'open-vm-tools'
+  service: 'vmtoolsd'

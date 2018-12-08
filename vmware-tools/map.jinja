@@ -1,51 +1,21 @@
-# Set defaults since deploying from sources
-{% set vmware_defaults = {
-  'tools':
-  {
-    'latest': 'VMwareTools-9.4.15-2827462.tar.gz',
-    'hash': 'md5=6d46188024553a4576977b54caae5403',
-    'source': 'http://webserver/Latest_VMware_Tools/VMwareTools-9.4.15-2827462.tar.gz',
-  },
-} %}
+{# vi: set ft=jinja: #}
 
-# Merge the default settings with pillar data
-{% set vmware = salt['pillar.get']('vmware:tools', default=vmware_defaults.tools,merge=True) %}
+{% import_yaml "vmware-tools/defaults.yaml" as defaults %}
+{% import_yaml "vmware-tools/osfamilymap.yaml" as osfamilymap %}
+{% import_yaml "vmware-tools/oscodenamemap.yaml" as oscodenamemap %}
+{% import_yaml "vmware-tools/osfingermap.yaml" as osfingermap %}
 
-# Get the settings for the osmajorrelease grain
-{% set os_ver_lookup = {
-  'RedHat':
-  {
-    7:
-    {
-      'include': 'open-vm-tools',
-      'package': 'open-vm-tools',
-      'service': 'vmtoolsd',
-    },
-    6:
-    {
-      'include': 'vmware-tools',
-    }
-  },
-  'Debian':
-  {
-    9:
-    {
-      'include': 'open-vm-tools',
-      'package': 'open-vm-tools',
-      'service': 'open-vm-tools',
-    }
-  },
-  'Ubuntu':
-  {
-    18:
-    {
-      'include': 'open-vm-tools',
-      'package': 'open-vm-tools',
-      'service': 'open-vm-tools',
-    }
-  }
-} %}
+{# merge the osfamily map #}
+{% set osfamily = salt['grains.filter_by'](osfamilymap, grain='os_family') or{} %}
+{% do defaults.vmware_tools.update(osfamily) %}
 
-{% set os_map = os_ver_lookup.get(grains.os, {}) %} 
-{% set osrelease = salt['grains.get']('osmajorrelease') | int %}
-{% set config = os_map.get(osrelease, {}) %} 
+{# merge oscodenameswap #}
+{% set oscode = salt['grains.filter_by'](oscodenamemap, grain='oscodename') or {} %}
+{% do defaults.vmware_tools.update(oscode) %}
+
+{# merge the osfingermap #}
+{% set osfinger = salt['grains.filter_by'](osfingermap, grain='osfinger') or {} %}
+{% do defaults.vmware_tools.update(osfinger) %}
+
+{# merge all #}
+{% set vmware = salt['pillar.get']('vmware:tools', default=defaults['vmware_tools'], merge=True) %}
