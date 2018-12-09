@@ -1,0 +1,62 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+trusty:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools
+
+utopic:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools
+
+vivid:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools
+
+wily:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools
+
+xenial:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools
+
+yakkety:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools
+
+zesty:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools
+
+artful:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools
+
+bionic:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools
+
+jessie:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools
+
+stretch:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools
+
+buster:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools

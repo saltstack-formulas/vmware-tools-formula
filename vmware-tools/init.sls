@@ -1,7 +1,7 @@
 {% if 'VMWare' in grains['virtual'] or 'VMware' in grains['virtual'] %}
-{% from "vmware-tools/map.jinja" import config with context %}
+{% from "vmware-tools/map.jinja" import vmware with context %}
 
 include:
-  - vmware-tools.{{ config.include }}
+  - vmware-tools.{{ vmware.include }}
 
 {% endif %}

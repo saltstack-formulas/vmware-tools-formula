@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+Debian:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: open-vm-tools
+
+RedHat:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: vmtoolsd
+
+Suse:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: vmtoolsd
+
+Arch:
+  include: open-vm-tools
+  package: open-vm-tools
+  service: vmtoolsd
